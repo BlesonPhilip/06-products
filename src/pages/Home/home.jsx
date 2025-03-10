@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./home.css";
 import { ScaleLoader } from "react-spinners";
+import { ToastContainer, toast } from "react-toastify";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -16,7 +17,7 @@ const Home = () => {
       const data = await response.json();
       setProducts(data);
     } catch (error) {
-      console.error("Error fetching products:", error);
+      toast.error("Something went wrong", { position: "top-center" });
     } finally {
       setLoad(false);
     }
@@ -33,6 +34,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <h2>Your Products</h2>
+      <ToastContainer />
       <hr />
 
       {load ? (
