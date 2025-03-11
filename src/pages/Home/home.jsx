@@ -53,6 +53,7 @@ const Home = () => {
               <h3>{item.title}</h3>
               <p>${item.price}</p>
               <p>{item.description}</p>
+              <p>{item.category}</p>
               <b style={{ color: "green" }}>{item.rating.rate}</b>
             </div>
           ))}
