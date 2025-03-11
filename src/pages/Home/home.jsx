@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./home.css";
-import { ScaleLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "../../utils/axios";
+import { Skeleton } from "antd";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -16,9 +16,6 @@ const Home = () => {
       setLoad(true);
       const response = await axios.get("/products");
       setProducts(response.data);
-      // const response = await fetch("https://fakestoreapi.com/products");
-      // const data = await response.json();
-      // setProducts(data);
     } catch (error) {
       toast.error("Something went wrong", { position: "top-center" });
     } finally {
@@ -41,8 +38,20 @@ const Home = () => {
       <hr />
 
       {load ? (
-        <div className="loader-div">
-          <ScaleLoader color="orange" />
+        <div
+          className="loader-div"
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(4, 1fr)",
+            gap: "20px",
+          }}
+        >
+          {[...Array(12)].map((_, index) => (
+            <div key={index} className="product-card">
+              <Skeleton.Image style={{ width: 150, height: 200 }} active />
+              <Skeleton active paragraph={{ rows: 2 }} />
+            </div>
+          ))}
         </div>
       ) : (
         <div className="product-container">
@@ -55,7 +64,7 @@ const Home = () => {
               <img src={item.image} alt={item.title} />
               <h3>{item.title}</h3>
               <p>${item.price}</p>
-              <p>{item.description}</p>
+              <p className="description">{item.description}</p>
               <p>{item.category}</p>
               <b style={{ color: "green" }}>{item.rating.rate}</b>
             </div>

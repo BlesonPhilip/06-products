@@ -55,7 +55,7 @@ hr {
 
 /* Product Title */
 .product-card h3 {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #444;
   margin: 10px 0;
 }
@@ -67,11 +67,18 @@ hr {
   color: #007bff;
 }
 
-/* Product Description */
-.product-card p:last-of-type {
+.product-card p.description {
   font-size: 0.9rem;
   color: #666;
   margin-top: 5px;
+
+  width: 100%; /* Ensures it fits within the card */
+  max-width: 280px; /* Limits the description width */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  line-clamp: 3;
 }
 
 /* Responsive
