@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./home.css";
 import { ScaleLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
+import axios from "axios";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -11,11 +12,13 @@ const Home = () => {
   const navigate = useNavigate();
 
   const getProductFromApi = async () => {
-    setLoad(true);
     try {
-      const response = await fetch("https://fakestoreapi.com/products");
-      const data = await response.json();
-      setProducts(data);
+      setLoad(true);
+      const response = await axios.get("https://fakestoreapi.com/products");
+      setProducts(response.data);
+      // const response = await fetch("https://fakestoreapi.com/products");
+      // const data = await response.json();
+      // setProducts(data);
     } catch (error) {
       toast.error("Something went wrong", { position: "top-center" });
     } finally {
