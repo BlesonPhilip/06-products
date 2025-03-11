@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ScaleLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
-import axios from "axios";
+import axios from "../../utils/axios";
 
 const Details = () => {
   const { id } = useParams();
@@ -13,9 +13,7 @@ const Details = () => {
   const fetchProductById = async () => {
     try {
       setLoad(true);
-      const response = await axios.get(
-        `https://fakestoreapi.com/products/${id}`
-      );
+      const response = await axios.get(`/products/${id}`);
       // if (!response.ok) throw new Error("Failed to fetch product");
       // const data = await response.json();
       setProduct(response.data);
